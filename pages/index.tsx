@@ -1,9 +1,58 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps } from "next";
+import { client } from "../lib/client";
 
-const Home: NextPage = () => {
+interface Product {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: string;
+  details: string;
+  image: [object[]];
+  name: string;
+  price: number;
+  slug: { current: string };
+}
+
+interface Banner {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: string;
+  buttonText: string;
+  desc: string;
+  discount: string;
+  image: object;
+  largeText1: string;
+  largeText2: string;
+  midText: string;
+  product: string;
+  saleTime: string;
+  smallText: string;
+}
+
+interface Props {
+  products: Product[];
+  bannerData: Banner[];
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const query = "*[_type == 'product']";
+  const products = await client.fetch(query);
+  const bannerQuery = "*[_type == 'banner']";
+  const bannerData = await client.fetch(bannerQuery);
+  return {
+    props: { products, bannerData },
+  };
+};
+
+const Home = ({ products, bannerData }: Props) => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 className="text-center font-extrabold text-9xl">Hello world</h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
     </div>
   );
 };
