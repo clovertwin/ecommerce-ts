@@ -49,11 +49,35 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Home = ({ products, bannerData }: Props) => {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <>
       <h1 className="text-center font-extrabold text-9xl">
         {bannerData[0].largeText1}
       </h1>
-    </div>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+      <h1 className="text-center font-extrabold text-9xl">
+        {bannerData[0].largeText1}
+      </h1>
+    </>
   );
 };
 
