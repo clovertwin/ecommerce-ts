@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
         <title>AccessoryShack</title>
       </Head>
       <Navbar />
-      <main>{children}</main>
+      <main className="mx-10">{children}</main>
       <Footer />
     </div>
   );

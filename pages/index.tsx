@@ -1,4 +1,5 @@
 import type { GetServerSideProps } from "next";
+import HeroBanner from "../components/HeroBanner";
 import { client } from "../lib/client";
 
 interface Product {
@@ -50,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Home = ({ products, bannerData }: Props) => {
   return (
     <>
+      <HeroBanner />
       <h1 className="text-center font-extrabold text-9xl">
         {bannerData[0].largeText1}
       </h1>
