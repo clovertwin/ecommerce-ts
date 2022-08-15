@@ -18,7 +18,7 @@ const Navbar = () => {
         className="relative flex text-2xl cursor-pointer text-neutral-600 transition-transform duration-500 ease-in-out hover:scale-125 hover:text-black"
       >
         <MdOutlineShoppingCart />
-        <span className="absolute -right-2 -top-1 text-xs font-semibold bg-red-500 text-neutral-50 w-4 h-4 leading-tight rounded-full text-center">
+        <span className="absolute -right-2 -top-1 text-[.70rem] font-semibold bg-red-500 text-neutral-50 w-4 h-4 leading-snug rounded-full text-center">
           0
         </span>
       </button>
