@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from "next";
 import HeroBanner from "../components/HeroBanner";
+import ProductItem from "../components/ProductItem";
 import { client } from "../lib/client";
 import { Banner, Product } from "../typings";
 
@@ -23,12 +24,17 @@ const Home = ({ products, bannerData }: Props) => {
     <>
       <HeroBanner bannerData={bannerData[0]} />
       <div className="mt-20 flex flex-col items-center">
-        <h2 className="text-7xl font-extrabold text-neutral-600">
+        <h2 className="text-5xl font-extrabold text-neutral-600 text-center">
           All Products
         </h2>
-        <p className="mt-3 text-2xl text-neutral-500">
+        <p className="mt-3 text-2xl text-neutral-500 text-center">
           High quality devices that won&apos;t break the bank!
         </p>
+        <div className="flex flex-wrap justify-center">
+          {products?.map((product) => (
+            <ProductItem key={product._id} product={product} />
+          ))}
+        </div>
       </div>
     </>
   );

@@ -9,20 +9,20 @@ interface Props {
 }
 
 const Product = ({ product: { image, name, slug, price } }: Props) => {
-  const imageProps = useNextSanityImage(client, image);
+  const imageProps = useNextSanityImage(client, image[0]);
 
   return (
-    <>
+    <div className="hover:cursor-pointer mt-10">
       <Link href={`/product/${slug.current}`}>
         <div>
-          <div>
-            <Image {...imageProps} alt={`${name} image`} layout="responsive" />
+          <div className="h-60 w-60">
+            <Image {...imageProps} alt="product image" layout="responsive" />
           </div>
-          <p>{name}</p>
-          <p>${price}</p>
+          <p className="text-xl mt-5 text-neutral-500">{name}</p>
+          <p className="font-bold text-2xl">${price}</p>
         </div>
       </Link>
-    </>
+    </div>
   );
 };
 
