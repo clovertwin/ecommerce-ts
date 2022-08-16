@@ -13,14 +13,14 @@ const HeroBanner = ({ bannerData }: Props) => {
 
   return (
     <div className="h-[720px] bg-neutral-300 text-center pt-5 flex flex-col items-center sm:h-[800px] md:items-start md:grid md:mt-20 md:rounded-2xl md:text-left md:grid-cols-6 md:grid-rows-6 md:px-10 md:h-[500px]">
-      <div className="leading-[.8] text-left md:col-start-1 md:col-end-5 md:row-start-2 md:row-end-5 lg:col-start-2">
-        <h3 className="text-center text-2xl md:text-left ml-1.5">
+      <div className="leading-[.8] text-left md:col-start-1 md:col-end-5 md:row-start-2 md:row-end-5 lg:row-end-6">
+        <h3 className="text-center text-neutral-500 text-2xl ml-1.5 md:text-left lg:text-3xl">
           {bannerData.smallText}
         </h3>
-        <h3 className="text-center font-bold ml-1 text-4xl mt-5 md:mt-0 md:text-left md:text-7xl">
+        <h3 className="text-center font-bold ml-1 text-4xl mt-5 md:mt-0 md:text-left md:text-7xl lg:text-8xl">
           {bannerData.midText}
         </h3>
-        <h3 className="text-center font-bold text-neutral-50 tracking-tighter leading-[.8] text-9xl md:text-left md:text-[160px]">
+        <h3 className="text-center font-bold text-neutral-50 tracking-tighter leading-[.8] text-9xl md:text-left md:text-[160px] lg:text-[200px]">
           {bannerData.largeText1}
         </h3>
       </div>
@@ -28,13 +28,15 @@ const HeroBanner = ({ bannerData }: Props) => {
         <Image {...imageProps} alt="banner image" layout="responsive" />
       </div>
       <div className="flex flex-col md:col-start-2 md:col-end-7 md:justify-self-end md:mr-10 md:row-start-6 md:row-end-7 lg:ml-10 lg:col-start-3 lg:col-end-7 lg:justify-self-center">
-        <h3 className="text-xl">{bannerData.desc}</h3>
+        <h3 className="text-2xl md:text-xl lg:text-2xl text-neutral-500">
+          {bannerData.desc}
+        </h3>
       </div>
-      <div className="col-start-1 col-end-4 row-start-5 row-end-6 lg:col-start-2">
+      <div className="col-start-1 col-end-4 row-start-5 row-end-6 lg:row-start-6 lg:row-end-7">
         <Link href={`/product/${bannerData.product}`}>
           <button
             type="button"
-            className="rounded-full py-2 px-7 mt-10 ml-1.5 text-neutral-50 bg-red-500 text-2xl font-semibold transition-transform ease-in-out duration-500 hover:scale-110 hover:bg-red-600"
+            className="rounded-full py-2 px-7 mt-10 ml-1.5 text-neutral-50 bg-red-500 text-2xl font-semibold transition-transform ease-in-out duration-500 hover:scale-110 hover:bg-red-600 lg:mt-0"
           >
             {bannerData.buttonText}
           </button>

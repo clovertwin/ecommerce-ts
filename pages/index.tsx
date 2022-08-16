@@ -22,9 +22,14 @@ const Home = ({ products, bannerData }: Props) => {
   return (
     <>
       <HeroBanner bannerData={bannerData[0]} />
-      <h1 className="text-center font-extrabold text-4xl md:text-9xl">
-        {bannerData[0].largeText1}
-      </h1>
+      <div className="mt-20 flex flex-col items-center">
+        <h2 className="text-7xl font-extrabold text-neutral-600">
+          All Products
+        </h2>
+        <p className="mt-3 text-2xl text-neutral-500">
+          High quality devices that won&apos;t break the bank!
+        </p>
+      </div>
     </>
   );
 };
