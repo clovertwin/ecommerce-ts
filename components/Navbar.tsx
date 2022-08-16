@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-30 flex justify-between items-center bg-neutral-50 shadow-md px-7 py-3">
-      <p className="font-bold text-lg text-neutral-600 transition-transform duration-500 ease-in-out hover:text-black">
+      <p className="font-bold text-xl text-neutral-600 transition-transform duration-500 ease-in-out hover:text-black">
         <Link href="/">AccessoryShack</Link>
       </p>
 
