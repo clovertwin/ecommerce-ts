@@ -1,4 +1,5 @@
 import type { GetServerSideProps } from "next";
+import FooterBanner from "../components/FooterBanner";
 import HeroBanner from "../components/HeroBanner";
 import ProductItem from "../components/ProductItem";
 import { client } from "../lib/client";
@@ -36,6 +37,7 @@ const Home = ({ products, bannerData }: Props) => {
           ))}
         </div>
       </div>
+      <FooterBanner />
     </>
   );
 };

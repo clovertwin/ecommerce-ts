@@ -12,7 +12,7 @@ const Product = ({ product: { image, name, slug, price } }: Props) => {
   const imageProps = useNextSanityImage(client, image[0]);
 
   return (
-    <div className="hover:cursor-pointer mt-10">
+    <div className="hover:cursor-pointer mt-10 rounded-2xl shadow-lg p-10 m-5">
       <Link href={`/product/${slug.current}`}>
         <div>
           <div className="h-60 w-60">
