@@ -31,13 +31,13 @@ const Home = ({ products, bannerData }: Props) => {
         <p className="mt-3 text-2xl text-neutral-500 text-center">
           High quality devices that won&apos;t break the bank!
         </p>
-        <div className="flex flex-wrap justify-center">
+        <div className="grid grid-cols-1 auto-rows-auto gap-6 mt-10 md:grid-cols-2 xl:grid-cols-3">
           {products?.map((product) => (
             <ProductItem key={product._id} product={product} />
           ))}
         </div>
       </div>
-      <FooterBanner />
+      <FooterBanner bannerData={bannerData[0]} />
     </>
   );
 };

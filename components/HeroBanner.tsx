@@ -25,7 +25,12 @@ const HeroBanner = ({ bannerData }: Props) => {
         </h3>
       </div>
       <div className="h-80 w-80 mt-5 sm:h-[400px] sm:w-[400px] md:col-start-2 md:col-end-7 md:justify-self-end lg:col-start-3 lg:justify-self-center">
-        <Image {...imageProps} alt="banner image" layout="responsive" />
+        <Image
+          {...imageProps}
+          alt="banner image"
+          layout="responsive"
+          priority
+        />
       </div>
       <div className="flex flex-col md:col-start-2 md:col-end-7 md:justify-self-end md:mr-10 md:row-start-6 md:row-end-7 lg:ml-10 lg:col-start-3 lg:col-end-7 lg:justify-self-center">
         <h3 className="text-2xl md:text-xl lg:text-2xl text-neutral-500">
