@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { client, urlFor } from "../../lib/client";
 import { Product } from "../../typings";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 type Products = Product[];
 
@@ -61,18 +62,31 @@ export const ProductPage = ({ product, products }: Props) => {
             alt={`${product.name} image`}
           />
         </div>
-        <div className="flex justify-between mt-10">
+        <div className="flex justify-start mt-5 w-80">
           {product.image?.map((img, i) => (
             <img
               key={i}
               src={urlFor(img).url()}
               alt={`${i} product image`}
-              className={`h-16 w-16 rounded-xl m-1 transition-colors ease-in-out duration-300 ${
+              className={`h-16 w-16 rounded-xl mr-2 transition-colors ease-in-out duration-300 ${
                 i === index ? "bg-red-500" : "bg-neutral-200"
               }`}
               onMouseEnter={() => setIndex(i)}
             />
           ))}
+        </div>
+      </div>
+      <div className="mt-10 flex flex-col items-center">
+        <h2 className="w-80 font-bold text-3xl text-neutral-600">
+          {product.name}
+        </h2>
+        <div className="flex items-center w-80 text-red-500 mt-2">
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiOutlineStar />
+          <p className="ml-2 text-black">(20)</p>
         </div>
       </div>
     </div>
