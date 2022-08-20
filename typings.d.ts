@@ -23,7 +23,7 @@ export interface Product {
   _type: string;
   _updatedAt: string;
   details: string;
-  image: [object[]];
+  image: object[];
   name: string;
   price: number;
   slug: { current: string };

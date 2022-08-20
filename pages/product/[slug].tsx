@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { client } from "../../lib/client";
+import { client, urlFor } from "../../lib/client";
 import { Product } from "../../typings";
 
 type Products = Product[];
@@ -49,10 +50,31 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const ProductPage = ({ product, products }: Props) => {
+  const [index, setIndex] = useState(0);
+
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <h2>{products[0].name}</h2>
+    <div className="mt-10">
+      <div className="flex flex-col items-center">
+        <div className="h-80 w-80 bg-neutral-200 rounded-xl hover:bg-red-500 transition-colors ease-in-out duration-300">
+          <img
+            src={urlFor(product.image[index]).url()}
+            alt={`${product.name} image`}
+          />
+        </div>
+        <div className="flex justify-between mt-10">
+          {product.image?.map((img, i) => (
+            <img
+              key={i}
+              src={urlFor(img).url()}
+              alt={`${i} product image`}
+              className={`h-16 w-16 rounded-xl m-1 transition-colors ease-in-out duration-300 ${
+                i === index ? "bg-red-500" : "bg-neutral-200"
+              }`}
+              onMouseEnter={() => setIndex(i)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
