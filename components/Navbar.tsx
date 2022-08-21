@@ -14,7 +14,7 @@ const Navbar = () => {
 
       <button
         type="button"
-        onClick={() => setShowCart((prev) => !prev)}
+        onClick={() => setShowCart(true)}
         className="relative flex text-2xl cursor-pointer text-neutral-600 transition-transform duration-500 ease-in-out hover:scale-125 hover:text-black"
       >
         <MdOutlineShoppingCart />
@@ -22,7 +22,7 @@ const Navbar = () => {
           0
         </span>
       </button>
-      {showCart && <Cart />}
+      {showCart && <Cart setShowCart={setShowCart} />}
     </header>
   );
 };
