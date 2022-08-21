@@ -33,7 +33,12 @@ const Home = ({ products, bannerData }: Props) => {
         </p>
         <div className="grid grid-cols-1 auto-rows-auto gap-6 mt-10 md:grid-cols-2 xl:grid-cols-3">
           {products?.map((product) => (
-            <ProductItem key={product._id} product={product} />
+            <div
+              key={product._id}
+              className="transition-transform ease-in-out duration-300 hover:scale-110"
+            >
+              <ProductItem product={product} />
+            </div>
           ))}
         </div>
       </div>

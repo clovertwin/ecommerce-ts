@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { client, urlFor } from "../../lib/client";
 import { Product } from "../../typings";
+import ProductItem from "../../components/ProductItem";
 import {
   AiFillStar,
   AiOutlineStar,
@@ -109,6 +110,26 @@ export const ProductPage = ({ product, products }: Props) => {
               <AiOutlinePlus />
             </div>
           </div>
+        </div>
+        <div className="flex w-80 mt-10 items-center justify-center">
+          <button className="px-5 py-2 bg-neutral-50 border border-red-500 text-lg font-medium text-red-500 mr-6 w-36">
+            Add To Cart
+          </button>
+          <button className="px-5 py-2 bg-red-500 text-neutral-50 text-lg font-medium w-36 border border-red-500">
+            Buy Now
+          </button>
+        </div>
+      </div>
+      <h3 className="mt-24 font-bold text-3xl text-center">
+        You may also like
+      </h3>
+      <div className="mt-10 relative overflow-x-hidden w-full flex">
+        <div className="animate-marquee whitespace-nowrap flex">
+          {products.map((product) => (
+            <div key={product._id} className="mr-5">
+              <ProductItem product={product} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
