@@ -6,7 +6,10 @@ interface Props {
 
 const Cart = ({ setShowCart }: Props) => {
   return (
-    <div className="fixed w-screen right-0 top-0 z-40 bg-opacity-25 bg-neutral-600">
+    <div
+      onClick={() => setShowCart(false)}
+      className="fixed w-screen right-0 top-0 z-40 bg-opacity-60 bg-neutral-900"
+    >
       <div className="w-3/4 h-screen float-right py-10 px-2 relative bg-neutral-50">
         <button onClick={() => setShowCart(false)}>close</button>
       </div>
