@@ -22,7 +22,7 @@ const HeroBanner = ({
   const imageProps = useNextSanityImage(client, image);
 
   return (
-    <div className="h-[720px] bg-neutral-300 text-center pt-5 flex flex-col items-center sm:h-[800px] md:items-start md:grid md:mt-20 md:rounded-2xl md:text-left md:grid-cols-6 md:grid-rows-6 md:px-10 md:h-[500px]">
+    <div className="h-auto bg-neutral-300 text-center pt-5 flex flex-col items-center sm:h-[800px] md:items-start md:grid md:mt-20 md:rounded-2xl md:text-left md:grid-cols-6 md:grid-rows-6 md:px-10 md:h-[500px]">
       <div className="leading-[.8] text-left md:col-start-1 md:col-end-5 md:row-start-2 md:row-end-5 lg:row-end-6">
         <h3 className="text-center text-neutral-500 text-2xl ml-1.5 md:text-left lg:text-3xl">
           {smallText}
@@ -47,7 +47,7 @@ const HeroBanner = ({
           {desc}
         </h3>
       </div>
-      <div className="col-start-1 col-end-4 row-start-5 row-end-6 lg:row-start-6 lg:row-end-7">
+      <div className="col-start-1 col-end-4 row-start-5 row-end-6 mb-10 lg:row-start-6 lg:row-end-7">
         <Link href={`/product/${product}`}>
           <button
             type="button"

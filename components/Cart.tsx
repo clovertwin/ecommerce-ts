@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useStateContext } from "../context/StateContext";
 
-interface Props {
-  setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Cart = ({ setShowCart }: Props) => {
-  // useState just for dev, replace with context
-  const [cartItems, setCartItems] = useState(true);
+const Cart = () => {
+  const { cartItems, showCart, setShowCart } = useStateContext();
 
   return (
     <div
@@ -23,12 +19,15 @@ const Cart = ({ setShowCart }: Props) => {
           >
             <AiOutlineLeft />
           </div>
-          <p className="ml-3" onClick={() => setShowCart(false)}>
+          <p
+            className="ml-3 hover:cursor-pointer"
+            onClick={() => setShowCart(false)}
+          >
             Your Cart
           </p>
           <p className="ml-3 text-red-500">(0 items)</p>
         </div>
-        {!cartItems && (
+        {cartItems.length < 1 && (
           <div className="flex flex-col items-center justify-center mt-14">
             <MdOutlineShoppingCart className="text-9xl" />
             <h3 className="mt-5 text-3xl font-semibold">Your cart is empty</h3>
@@ -40,7 +39,7 @@ const Cart = ({ setShowCart }: Props) => {
             </button>
           </div>
         )}
-        {cartItems && <h3>Cart Items</h3>}
+        {cartItems.length >= 1 && <h3>Cart Items</h3>}
       </div>
     </div>
   );

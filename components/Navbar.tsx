@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useStateContext } from "../context/StateContext";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Cart from "./Cart";
 
 const Navbar = () => {
-  const [showCart, setShowCart] = useState(false);
+  const { showCart, setShowCart } = useStateContext();
 
   return (
     <header className="sticky top-0 z-30 flex justify-between items-center bg-neutral-50 shadow-md px-7 py-3">
@@ -22,7 +22,7 @@ const Navbar = () => {
           0
         </span>
       </button>
-      {showCart && <Cart setShowCart={setShowCart} />}
+      {showCart && <Cart />}
     </header>
   );
 };

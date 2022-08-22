@@ -11,7 +11,7 @@ interface CartItem extends Product {
 }
 
 interface StateContextInterface {
-  cartItems: CartItem[];
+  cartItems: [] | CartItem[];
   setCartItems: React.Dispatch<React.SetStateAction<never[]>>;
   showCart: boolean;
   setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +22,7 @@ interface StateContextInterface {
   qty: number;
 }
 
-const Context = createContext<StateContextInterface | null>(null);
+const Context = createContext({} as StateContextInterface);
 
 export const StateContext = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState([]);
