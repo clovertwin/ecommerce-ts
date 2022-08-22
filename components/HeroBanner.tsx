@@ -27,7 +27,7 @@ const HeroBanner = ({
         <h3 className="text-center text-neutral-500 text-2xl ml-1.5 md:text-left lg:text-3xl">
           {smallText}
         </h3>
-        <h3 className="text-center font-bold ml-1 text-4xl mt-5 md:mt-0 md:text-left md:text-7xl lg:text-8xl">
+        <h3 className="text-center font-bold ml-1 text-6xl mt-5 md:mt-0 md:text-left md:text-7xl lg:text-8xl">
           {midText}
         </h3>
         <h3 className="text-center font-bold text-neutral-50 tracking-tighter leading-[.8] text-9xl md:text-left md:text-[160px] lg:text-[200px]">
