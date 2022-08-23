@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { client, urlFor } from "../../lib/client";
 import { Product } from "../../typings";
 import ProductItem from "../../components/ProductItem";
+import { useStateContext } from "../../context/StateContext";
 import {
   AiFillStar,
   AiOutlineStar,
@@ -57,6 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const ProductPage = ({ product, products }: Props) => {
+  const { qty, increaseQty, decreaseQty, onAdd } = useStateContext();
   const [index, setIndex] = useState(0);
 
   return (
@@ -101,19 +103,28 @@ export const ProductPage = ({ product, products }: Props) => {
           <div className="flex items-center w-80 mt-5">
             <h3 className="font-bold text-xl mr-5">Quantity:</h3>
             <div className="border flex border-neutral-600">
-              <div className="flex items-center justify-center px-3 py-1 hover:cursor-pointer">
+              <div
+                onClick={decreaseQty}
+                className="flex items-center justify-center px-3 py-1 hover:cursor-pointer"
+              >
                 <AiOutlineMinus />
               </div>
               <div className="flex items-center justify-center px-4 py-1 border-x border-neutral-600">
-                <p className="text-2xl">1</p>
+                <p className="text-2xl">{qty}</p>
               </div>
-              <div className="flex items-center justify-center px-3 py-1 hover:cursor-pointer">
+              <div
+                onClick={increaseQty}
+                className="flex items-center justify-center px-3 py-1 hover:cursor-pointer"
+              >
                 <AiOutlinePlus />
               </div>
             </div>
           </div>
           <div className="flex w-80 mt-10 items-center justify-center lg:w-96">
-            <button className="px-5 py-2 bg-neutral-50 border border-red-500 text-lg font-medium text-red-500 mr-6 w-36 transition-transform ease-in-out duration-300 hover:scale-110 lg:w-52">
+            <button
+              onClick={() => onAdd(product, qty)}
+              className="px-5 py-2 bg-neutral-50 border border-red-500 text-lg font-medium text-red-500 mr-6 w-36 transition-transform ease-in-out duration-300 hover:scale-110 lg:w-52"
+            >
               Add To Cart
             </button>
             <button className="px-5 py-2 bg-red-500 text-neutral-50 text-lg font-medium w-36 border border-red-500 transition-transform ease-in-out duration-300 hover:scale-110 lg:w-52">

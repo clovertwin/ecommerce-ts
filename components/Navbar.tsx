@@ -4,7 +4,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import Cart from "./Cart";
 
 const Navbar = () => {
-  const { showCart, setShowCart } = useStateContext();
+  const { showCart, setShowCart, totalQuantitys } = useStateContext();
 
   return (
     <header className="sticky top-0 z-30 flex justify-between items-center bg-neutral-50 shadow-md px-7 py-3">
@@ -19,7 +19,7 @@ const Navbar = () => {
       >
         <MdOutlineShoppingCart />
         <span className="absolute -right-2 -top-1 text-[.70rem] font-semibold bg-red-500 text-neutral-50 w-4 h-4 leading-snug rounded-full text-center">
-          0
+          {totalQuantitys}
         </span>
       </button>
       {showCart && <Cart />}

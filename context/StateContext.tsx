@@ -12,7 +12,7 @@ interface CartItem extends Product {
 
 interface StateContextInterface {
   cartItems: [] | CartItem[];
-  setCartItems: React.Dispatch<React.SetStateAction<never[]>>;
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
   showCart: boolean;
   setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
   totalPrice: number;
@@ -20,16 +20,45 @@ interface StateContextInterface {
   totalQuantitys: number;
   setTotalQuantitys: React.Dispatch<React.SetStateAction<number>>;
   qty: number;
+  increaseQty: () => void;
+  decreaseQty: () => void;
+  onAdd: (product: Product, quantity: number) => void;
 }
 
 const Context = createContext({} as StateContextInterface);
 
 export const StateContext = ({ children }: Props) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantitys, setTotalQuantitys] = useState(0);
   const [qty, setQty] = useState(1);
+
+  const onAdd = (product: Product, quantity: number) => {
+    const foundItem = cartItems.find(
+      (item: CartItem) => item._id === product._id
+    );
+    setTotalPrice((prev) => prev + product.price * quantity);
+    setTotalQuantitys((prev) => prev + quantity);
+    if (foundItem) {
+      const updatedCartItems = cartItems.map((item: CartItem) => {
+        if (item._id === product._id) {
+          return { ...item, quantity: item.quantity + quantity };
+        } else {
+          return item;
+        }
+      });
+      setCartItems(updatedCartItems);
+    } else {
+      const cartItem: CartItem = { ...product, quantity };
+      setCartItems((prev: CartItem[]) => [...prev, cartItem]);
+    }
+    toast.success(`${qty} ${product.name} added to cart.`);
+  };
+
+  const increaseQty = () => setQty((prev) => prev + 1);
+
+  const decreaseQty = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
 
   return (
     <Context.Provider
@@ -43,6 +72,9 @@ export const StateContext = ({ children }: Props) => {
         totalQuantitys,
         setTotalQuantitys,
         qty,
+        increaseQty,
+        decreaseQty,
+        onAdd,
       }}
     >
       {children}
