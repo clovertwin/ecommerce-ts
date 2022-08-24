@@ -23,6 +23,7 @@ interface StateContextInterface {
   increaseQty: () => void;
   decreaseQty: () => void;
   onAdd: (product: Product, quantity: number) => void;
+  onRemove: (product: Product) => void;
 }
 
 const Context = createContext({} as StateContextInterface);
@@ -56,6 +57,17 @@ export const StateContext = ({ children }: Props) => {
     toast.success(`${qty} ${product.name} added to cart.`);
   };
 
+  const onRemove = (product: Product) => {
+    const foundItem = cartItems.find(
+      (item: CartItem) => item._id === product._id
+    );
+    if (foundItem) {
+      setTotalPrice((prev) => prev - product.price);
+      setTotalQuantitys((prev) => prev - foundItem.quantity);
+      setCartItems(cartItems.filter((item) => item._id !== product._id));
+    } else return;
+  };
+
   const increaseQty = () => setQty((prev) => prev + 1);
 
   const decreaseQty = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
@@ -75,6 +87,7 @@ export const StateContext = ({ children }: Props) => {
         increaseQty,
         decreaseQty,
         onAdd,
+        onRemove,
       }}
     >
       {children}
