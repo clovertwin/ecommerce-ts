@@ -63,7 +63,7 @@ export const StateContext = ({ children }: Props) => {
       (item: CartItem) => item._id === product._id
     );
     if (foundItem) {
-      setTotalPrice((prev) => prev - product.price);
+      setTotalPrice((prev) => prev - foundItem.price * foundItem.quantity);
       setTotalQuantitys((prev) => prev - foundItem.quantity);
       setCartItems(cartItems.filter((item) => item._id !== product._id));
     } else return;

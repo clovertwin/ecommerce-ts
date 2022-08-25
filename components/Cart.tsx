@@ -4,13 +4,18 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { useStateContext } from "../context/StateContext";
 
 const Cart = () => {
-  const { cartItems, showCart, setShowCart } = useStateContext();
+  const {
+    cartItems,
+    showCart,
+    setShowCart,
+    onToggleAddSubtractItem,
+    totalQuantitys,
+    totalPrice,
+    onRemove,
+  } = useStateContext();
 
   return (
-    <div
-      onClick={() => setShowCart(false)}
-      className="fixed w-screen right-0 top-0 z-40 bg-opacity-60 bg-neutral-900 backdrop-blur-sm"
-    >
+    <div className="fixed w-screen right-0 top-0 z-40 bg-opacity-60 bg-neutral-900 backdrop-blur-sm">
       <div className="w-screen h-screen float-right py-10 px-2 relative bg-neutral-50 text-neutral-600 md:w-1/2">
         <div className="flex items-center ml-3 text-xl font-medium">
           <div
@@ -25,7 +30,7 @@ const Cart = () => {
           >
             Your Cart
           </p>
-          <p className="ml-3 text-red-500">(0 items)</p>
+          <p className="ml-3 text-red-500">({totalQuantitys})</p>
         </div>
         {cartItems.length < 1 && (
           <div className="flex flex-col items-center justify-center mt-14">
@@ -39,7 +44,7 @@ const Cart = () => {
             </button>
           </div>
         )}
-        {cartItems.length >= 1 && <h3>Cart Items</h3>}
+        {cartItems.length >= 1 && <h2>cart items</h2>}
       </div>
     </div>
   );
