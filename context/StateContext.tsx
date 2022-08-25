@@ -24,6 +24,7 @@ interface StateContextInterface {
   decreaseQty: () => void;
   onAdd: (product: Product, quantity: number) => void;
   onRemove: (product: Product) => void;
+  onToggleAddSubtractItem: (product: Product, action: "inc" | "dec") => void;
 }
 
 const Context = createContext({} as StateContextInterface);
@@ -68,6 +69,37 @@ export const StateContext = ({ children }: Props) => {
     } else return;
   };
 
+  const onToggleAddSubtractItem = (product: Product, action: "inc" | "dec") => {
+    const foundItem = cartItems.find((item) => item._id === product._id);
+    const foundItemId = cartItems.findIndex((item) => item._id === product._id);
+    if (foundItem) {
+      if (action === "inc") {
+        const updatedItem = { ...foundItem, quantity: foundItem.quantity + 1 };
+        let upDatedCartItems = [...cartItems];
+        upDatedCartItems[foundItemId] = updatedItem;
+        setCartItems(upDatedCartItems);
+        setTotalPrice((prev) => prev + foundItem.price);
+        setTotalQuantitys((prev) => prev + 1);
+      } else if (action === "dec") {
+        if (foundItem.quantity > 1) {
+          const upDatedItem = {
+            ...foundItem,
+            quantity: foundItem.quantity - 1,
+          };
+          let updatedCartItems = [...cartItems];
+          updatedCartItems[foundItemId] = upDatedItem;
+          setCartItems(updatedCartItems);
+          setTotalPrice((prev) => prev - foundItem.price);
+          setTotalQuantitys((prev) => prev - 1);
+        } else {
+          return;
+        }
+      }
+    } else {
+      return;
+    }
+  };
+
   const increaseQty = () => setQty((prev) => prev + 1);
 
   const decreaseQty = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
@@ -88,6 +120,7 @@ export const StateContext = ({ children }: Props) => {
         decreaseQty,
         onAdd,
         onRemove,
+        onToggleAddSubtractItem,
       }}
     >
       {children}
