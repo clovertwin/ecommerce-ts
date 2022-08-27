@@ -1,7 +1,13 @@
 import React from "react";
-import { AiOutlineLeft } from "react-icons/ai";
+import {
+  AiOutlineLeft,
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiOutlineCloseCircle,
+} from "react-icons/ai";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useStateContext } from "../context/StateContext";
+import { urlFor } from "../lib/client";
 
 const Cart = () => {
   const {
@@ -30,7 +36,9 @@ const Cart = () => {
           >
             Your Cart
           </p>
-          <p className="ml-3 text-red-500">({totalQuantitys})</p>
+          <p className="ml-3 text-red-500">
+            ({totalQuantitys} {totalQuantitys > 1 ? "items" : "item"})
+          </p>
         </div>
         {cartItems.length < 1 && (
           <div className="flex flex-col items-center justify-center mt-14">
@@ -44,7 +52,64 @@ const Cart = () => {
             </button>
           </div>
         )}
-        {cartItems.length >= 1 && <h2>cart items</h2>}
+        {cartItems.length >= 1 && (
+          <div className="flex flex-col justify-between items-center mt-3">
+            <div className="h-[65vh] overflow-y-scroll w-full">
+              {cartItems.map((item) => (
+                <div key={item._id} className="flex items-center mt-5">
+                  <img
+                    src={urlFor(item.image[0]).url()}
+                    alt={`${item.name} image`}
+                    className="w-28 h-28 rounded-xl bg-neutral-300 p-2 mr-5"
+                  />
+                  <div className="flex-col w-full mr-3">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-semibold mr-3">
+                        {item.name}
+                      </h3>
+                      <p className="text-lg font-bold text-black">
+                        ${item.price}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center mt-4">
+                      <div className="border flex border-neutral-600">
+                        <div
+                          onClick={() => onToggleAddSubtractItem(item, "dec")}
+                          className="flex items-center justify-center px-3 py-1 hover:cursor-pointer"
+                        >
+                          <AiOutlineMinus />
+                        </div>
+                        <div className="flex items-center justify-center px-4 py-1 border-x border-neutral-600">
+                          <p className="text-xl">{item.quantity}</p>
+                        </div>
+                        <div
+                          onClick={() => onToggleAddSubtractItem(item, "inc")}
+                          className="flex items-center justify-center px-3 py-1 hover:cursor-pointer"
+                        >
+                          <AiOutlinePlus />
+                        </div>
+                      </div>
+                      <AiOutlineCloseCircle
+                        onClick={() => onRemove(item)}
+                        className="text-red-500 text-2xl hover:cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-around w-full text-2xl font-bold mt-10">
+              <h3>Subtotal:</h3>
+              <p>${totalPrice}</p>
+            </div>
+            <button
+              className="bg-red-500 text-neutral-50 px-5 py-2 mt-3 rounded-full text-2xl w-3/4 transition-transform ease-in-out duration-300 hover:scale-110"
+              type="button"
+            >
+              Pay With Stripe
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
