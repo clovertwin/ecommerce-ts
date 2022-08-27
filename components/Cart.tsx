@@ -12,7 +12,6 @@ import { urlFor } from "../lib/client";
 const Cart = () => {
   const {
     cartItems,
-    showCart,
     setShowCart,
     onToggleAddSubtractItem,
     totalQuantitys,
@@ -22,7 +21,7 @@ const Cart = () => {
 
   return (
     <div className="fixed w-screen right-0 top-0 z-40 bg-opacity-60 bg-neutral-900 backdrop-blur-sm">
-      <div className="w-screen h-screen float-right py-10 px-2 relative bg-neutral-50 text-neutral-600 sm:w-3/4 md:w-1/2 lg:w-1/3">
+      <div className="w-screen h-screen float-right py-10 px-2 relative bg-neutral-50 text-neutral-600 sm:w-3/4 md:w-1/2 lg:w-2/5">
         <div className="flex items-center ml-3 text-xl font-medium">
           <div
             className="transition-transform ease-in-out duration-300 hover:scale-125 hover:cursor-pointer"
