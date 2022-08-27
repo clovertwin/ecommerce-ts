@@ -16,6 +16,12 @@ export interface Banner {
   smallText: string;
 }
 
+interface Image {
+  asset: { _ref: string };
+  _key: string;
+  _type: string;
+}
+
 export interface Product {
   _createdAt: string;
   _id: string;
@@ -23,8 +29,12 @@ export interface Product {
   _type: string;
   _updatedAt: string;
   details: string;
-  image: object[];
+  image: Image[];
   name: string;
   price: number;
   slug: { current: string };
+}
+
+export interface CartItem extends Product {
+  quantity: number;
 }

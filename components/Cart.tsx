@@ -8,6 +8,8 @@ import {
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
+import getStripe from "../lib/getStripe";
+import { toast } from "react-hot-toast";
 
 const Cart = () => {
   const {
@@ -19,6 +21,21 @@ const Cart = () => {
     onRemove,
   } = useStateContext();
 
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+    const response = await fetch("/api/stripe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItems),
+    });
+    if (response.status === 500) return;
+    const data = await response.json();
+    toast.loading("Redirecting...");
+    stripe!.redirectToCheckout({ sessionId: data.id });
+  };
+
   return (
     <div className="fixed w-screen right-0 top-0 z-40 bg-opacity-60 bg-neutral-900 backdrop-blur-sm">
       <div className="w-screen h-screen float-right py-10 px-2 relative bg-neutral-50 text-neutral-600 sm:w-3/4 md:w-1/2 lg:w-2/5">
@@ -29,12 +46,7 @@ const Cart = () => {
           >
             <AiOutlineLeft />
           </div>
-          <p
-            className="ml-3 hover:cursor-pointer"
-            onClick={() => setShowCart(false)}
-          >
-            Your Cart
-          </p>
+          <p className="ml-3">Your Cart</p>
           <p className="ml-3 text-red-500">
             ({totalQuantitys} {totalQuantitys > 1 ? "items" : "item"})
           </p>
@@ -102,6 +114,7 @@ const Cart = () => {
               <p>${totalPrice}</p>
             </div>
             <button
+              onClick={handleCheckout}
               className="bg-red-500 text-neutral-50 px-5 py-2 mt-3 rounded-full text-2xl w-3/4 transition-transform ease-in-out duration-300 hover:scale-110"
               type="button"
             >

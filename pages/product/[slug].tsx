@@ -58,8 +58,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const ProductPage = ({ product, products }: Props) => {
-  const { qty, increaseQty, decreaseQty, onAdd } = useStateContext();
+  const { qty, increaseQty, decreaseQty, onAdd, setShowCart, cartItems } =
+    useStateContext();
   const [index, setIndex] = useState(0);
+
+  const handleBuyNow = () => {
+    const founditem = cartItems.find((item) => item._id === product._id);
+    if (founditem) {
+      setShowCart(true);
+    } else {
+      onAdd(product, qty);
+      setShowCart(true);
+    }
+  };
 
   return (
     <div className="mt-10 text-neutral-600 md:mt-20">
@@ -127,7 +138,10 @@ export const ProductPage = ({ product, products }: Props) => {
             >
               Add To Cart
             </button>
-            <button className="px-5 py-2 bg-red-500 text-neutral-50 text-lg font-medium w-36 border border-red-500 transition-transform ease-in-out duration-300 hover:scale-110 lg:w-52">
+            <button
+              onClick={handleBuyNow}
+              className="px-5 py-2 bg-red-500 text-neutral-50 text-lg font-medium w-36 border border-red-500 transition-transform ease-in-out duration-300 hover:scale-110 lg:w-52"
+            >
               Buy Now
             </button>
           </div>
