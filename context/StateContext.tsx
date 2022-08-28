@@ -1,13 +1,9 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
-import { Product } from "../typings";
+import { Product, CartItem } from "../typings";
 import { toast } from "react-hot-toast";
 
 interface Props {
   children?: ReactNode;
-}
-
-interface CartItem extends Product {
-  quantity: number;
 }
 
 interface StateContextInterface {
