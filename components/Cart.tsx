@@ -66,7 +66,7 @@ const Cart = () => {
         )}
         {cartItems.length >= 1 && (
           <div className="flex flex-col justify-between items-center mt-3">
-            <div className="h-[65vh] overflow-y-scroll w-full">
+            <div className="h-[50vh] overflow-y-scroll w-full">
               {cartItems.map((item) => (
                 <div key={item._id} className="flex items-center mt-5">
                   <img
