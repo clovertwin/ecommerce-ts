@@ -48,7 +48,7 @@ const Cart = () => {
           </div>
           <p className="ml-3">Your Cart</p>
           <p className="ml-3 text-red-500">
-            ({totalQuantitys} {totalQuantitys > 1 ? "items" : "item"})
+            ({totalQuantitys} {totalQuantitys === 1 ? "item" : "items"})
           </p>
         </div>
         {cartItems.length < 1 && (
