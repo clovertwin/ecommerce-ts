@@ -1,8 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Banner } from "../typings";
-import { client } from "../lib/client";
-import { useNextSanityImage } from "next-sanity-image";
+import { urlFor } from "../lib/client";
 
 interface Props {
   bannerData: Banner;
@@ -19,8 +17,6 @@ const HeroBanner = ({
     image,
   },
 }: Props) => {
-  const imageProps = useNextSanityImage(client, image);
-
   return (
     <div className="h-auto bg-neutral-300 text-center py-5 flex flex-col items-center sm:h-[800px] md:items-start md:grid md:mt-20 md:rounded-2xl md:text-left md:grid-cols-6 md:grid-rows-6 md:px-10 md:h-[500px]">
       <div className="leading-[.8] text-left md:col-start-1 md:col-end-5 md:row-start-2 md:row-end-6">
@@ -35,12 +31,7 @@ const HeroBanner = ({
         </h3>
       </div>
       <div className="h-80 w-80 mt-5 sm:h-[400px] sm:w-[400px] md:col-start-2 md:col-end-7 md:justify-self-end lg:col-start-3 lg:justify-self-center">
-        <Image
-          {...imageProps}
-          alt="banner image"
-          layout="responsive"
-          priority
-        />
+        <img src={urlFor(image).url()} alt="banner image" />
       </div>
       <div className="flex flex-col md:col-start-2 md:col-end-7 md:justify-self-end md:mr-10 md:row-start-6 md:row-end-7 lg:ml-10 lg:col-start-3 lg:col-end-7 lg:justify-self-center">
         <h3 className="text-xl lg:text-2xl text-neutral-600">{desc}</h3>

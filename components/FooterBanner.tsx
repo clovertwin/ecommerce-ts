@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Banner } from "../typings";
-import { useNextSanityImage } from "next-sanity-image";
-import { client } from "../lib/client";
+import { urlFor } from "../lib/client";
 
 interface Props {
   bannerData: Banner;
@@ -21,8 +19,6 @@ const FooterBanner = ({
     image,
   },
 }: Props) => {
-  const imageProps = useNextSanityImage(client, image);
-
   return (
     <div className="mt-20">
       <div className="bg-red-500 flex flex-col items-center justify-between h-[700px] text-center p-5 md:flex-row md:px-10 md:h-[500px] md:rounded-2xl">
@@ -36,7 +32,7 @@ const FooterBanner = ({
           </h2>
         </div>
         <div className="h-60 w-60 md:h-80 md:w-80 xl:h-96 xl:w-96">
-          <Image {...imageProps} alt={`${product} image`} layout="responsive" />
+          <img src={urlFor(image).url()} alt="banner image" />
         </div>
         <div>
           <p className="text-neutral-50 text-2xl lg:text-3xl">{smallText}</p>
