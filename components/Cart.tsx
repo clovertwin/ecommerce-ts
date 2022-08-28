@@ -56,6 +56,7 @@ const Cart = () => {
             <MdOutlineShoppingCart className="text-9xl" />
             <h3 className="mt-5 text-3xl font-semibold">Your cart is empty</h3>
             <button
+              onClick={() => setShowCart(false)}
               type="button"
               className="px-14 py-2 text-2xl font-semibold text-neutral-50 bg-red-500 rounded-full mt-10 transition-transform ease-in-out duration-300 hover:scale-110"
             >
