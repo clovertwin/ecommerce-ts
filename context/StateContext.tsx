@@ -1,4 +1,10 @@
-import React, { useState, createContext, useContext, ReactNode } from "react";
+import React, {
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import { Product, CartItem } from "../typings";
 import { toast } from "react-hot-toast";
 
@@ -25,12 +31,38 @@ interface StateContextInterface {
 
 const Context = createContext({} as StateContextInterface);
 
+const initialState = []!;
+
 export const StateContext = ({ children }: Props) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialState);
   const [showCart, setShowCart] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantitys, setTotalQuantitys] = useState(0);
   const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    const localStorageCartData = localStorage.getItem("cart");
+    if (localStorageCartData) {
+      const parsedCartData = JSON.parse(localStorageCartData);
+      const localStorageTotalPrice = localStorage.getItem("totalPrice");
+      const localStorageQuantitys = localStorage.getItem("quantitys");
+      setCartItems(parsedCartData);
+      setTotalPrice(
+        localStorageTotalPrice ? JSON.parse(localStorageTotalPrice) : 0
+      );
+      setTotalQuantitys(
+        localStorageQuantitys ? JSON.parse(localStorageQuantitys) : 0
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cartItems !== initialState) {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+      localStorage.setItem("quantitys", JSON.stringify(totalQuantitys));
+    }
+  }, [cartItems, totalPrice, totalQuantitys]);
 
   const onAdd = (product: Product, quantity: number) => {
     const foundItem = cartItems.find(
